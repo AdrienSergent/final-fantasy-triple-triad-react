@@ -17,3 +17,9 @@
   border: 1px solid #ddd;
   background-color: #fff;
 }
+.cell.red {
+  background-color: #fdd;
+}
+.cell.blue {
+  background-color: #ddf;
+}

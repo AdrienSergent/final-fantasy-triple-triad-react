@@ -1,9 +1,45 @@
 .game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .player-hand {
-    margin: 0 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.player-hand {
+  margin: 0 20px;
+}
+.winner {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+.end-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.reset-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.reset-button:hover {
+  background-color: #0056b3;
+}
+.player-hand-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+}
+.cursor {
+  position: absolute;
+  top: 0px;
+  width: 30px;
+  height: auto;
+}
