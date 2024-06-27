@@ -1,0 +1,11 @@
+.hand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.hand > div {
+  margin: 10px 0;
+  cursor: pointer;
+}

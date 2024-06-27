@@ -1,0 +1,9 @@
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .player-hand {
+    margin: 0 20px;
+  }
+  
