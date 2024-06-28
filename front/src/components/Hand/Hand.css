@@ -13,6 +13,9 @@
 .hand-card:hover {
   transform: scale(1.1);
 }
-.hand-card.selected {
+.hand-card.selected-left {
+  transform: translateX(20px);
+}
+.hand-card.selected-right {
   transform: translateX(-20px);
 }

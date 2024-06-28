@@ -3,7 +3,7 @@ import Board from "../Board/Board";
 import Hand from "../Hand/Hand";
 import { fetchInitialGameState } from "../../utils/api";
 import "./Game.css";
-import cursorImage from "../../assets/down-arrow.png"; // Import the cursor image
+import cursorImage from "../../assets/cursor.png"; // Import the cursor image
 
 const Game = () => {
   const [board, setBoard] = useState([]);
@@ -35,7 +35,7 @@ const Game = () => {
     }
   };
 
-  const handleCardPlace = (index) => {
+  const handleCardPlace = (index, setFlippedCards) => {
     if (selectedCard && !board[index]) {
       const newBoard = board.slice();
       newBoard[index] = { ...selectedCard, position: index };
@@ -45,7 +45,7 @@ const Game = () => {
       } else {
         setPlayer2Hand(player2Hand.filter((c) => c.id !== selectedCard.id));
       }
-      checkForFlip(newBoard, index, selectedCard);
+      checkForFlip(newBoard, index, selectedCard, setFlippedCards);
       setSelectedCard(null);
       setCurrentPlayer(currentPlayer === "red" ? "blue" : "red");
       if (newBoard.every((cell) => cell !== null)) {
@@ -55,13 +55,15 @@ const Game = () => {
     }
   };
 
-  const checkForFlip = (board, index, card) => {
+  const checkForFlip = (board, index, card, setFlippedCards) => {
     const adjacentIndices = [
       index - 3, // above
       index + 3, // below
       index % 3 !== 0 ? index - 1 : null, // left
       index % 3 !== 2 ? index + 1 : null, // right
     ];
+
+    const newFlippedCards = [];
 
     adjacentIndices.forEach((adjIndex, i) => {
       if (
@@ -89,9 +91,12 @@ const Game = () => {
         }
         if (shouldFlip) {
           board[adjIndex].owner = card.owner;
+          newFlippedCards.push(adjIndex);
         }
       }
     });
+
+    setFlippedCards(newFlippedCards);
     setBoard(board);
   };
 
@@ -119,6 +124,7 @@ const Game = () => {
             onCardSelect={handleCardSelect}
             selectedCard={selectedCard}
             currentPlayer={currentPlayer}
+            playerPosition="left"
           />
         </div>
         <Board board={board} onCardPlace={handleCardPlace} />
@@ -131,6 +137,7 @@ const Game = () => {
             onCardSelect={handleCardSelect}
             selectedCard={selectedCard}
             currentPlayer={currentPlayer}
+            playerPosition="right"
           />
         </div>
       </div>

@@ -16,10 +16,25 @@
   cursor: pointer;
   border: 1px solid #ddd;
   background-color: #fff;
+  position: relative;
 }
 .cell.red {
   background-color: #fdd;
 }
 .cell.blue {
   background-color: #ddf;
+}
+.card-flip {
+  animation: flip 0.6s forwards;
+}
+@keyframes flip {
+  0% {
+    transform: rotateY(0);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
 }
