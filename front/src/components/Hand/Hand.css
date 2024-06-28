@@ -5,7 +5,14 @@
   align-items: center;
   margin: 20px;
 }
-.hand > div {
+.hand-card {
   margin: 10px 0;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.hand-card:hover {
+  transform: scale(1.1);
+}
+.hand-card.selected {
+  transform: translateX(-20px);
 }

@@ -4,7 +4,7 @@ import Hand from "../Hand/Hand";
 import { fetchInitialGameState } from "../../utils/api";
 import "./Game.css";
 import cursorImage from "../../assets/down-arrow.png"; // Import the cursor image
-console.log(cursorImage);
+
 const Game = () => {
   const [board, setBoard] = useState([]);
   const [player1Hand, setPlayer1Hand] = useState([]);
@@ -108,7 +108,32 @@ const Game = () => {
   };
 
   return (
-    <div className="game">
+    <div className="game-container">
+      <div className="game">
+        <div className="player-hand-container">
+          {currentPlayer === "red" && (
+            <img src={cursorImage} alt="cursor" className="cursor" />
+          )}
+          <Hand
+            hand={player1Hand}
+            onCardSelect={handleCardSelect}
+            selectedCard={selectedCard}
+            currentPlayer={currentPlayer}
+          />
+        </div>
+        <Board board={board} onCardPlace={handleCardPlace} />
+        <div className="player-hand-container">
+          {currentPlayer === "blue" && (
+            <img src={cursorImage} alt="cursor" className="cursor" />
+          )}
+          <Hand
+            hand={player2Hand}
+            onCardSelect={handleCardSelect}
+            selectedCard={selectedCard}
+            currentPlayer={currentPlayer}
+          />
+        </div>
+      </div>
       {gameOver && (
         <div className="end-game">
           <div className="winner">{winnerMessage}</div>
@@ -117,19 +142,6 @@ const Game = () => {
           </button>
         </div>
       )}
-      <div className="player-hand-container">
-        {currentPlayer === "red" && (
-          <img src={cursorImage} alt="cursor" className="cursor" />
-        )}
-        <Hand hand={player1Hand} onCardSelect={handleCardSelect} />
-      </div>
-      <Board board={board} onCardPlace={handleCardPlace} />
-      <div className="player-hand-container">
-        {currentPlayer === "blue" && (
-          <img src={cursorImage} alt="cursor" className="cursor" />
-        )}
-        <Hand hand={player2Hand} onCardSelect={handleCardSelect} />
-      </div>
     </div>
   );
 };
