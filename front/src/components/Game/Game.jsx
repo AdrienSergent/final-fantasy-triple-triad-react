@@ -13,6 +13,8 @@ const Game = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [winnerMessage, setWinnerMessage] = useState("");
+  const [player1Score, setPlayer1Score] = useState(5);
+  const [player2Score, setPlayer2Score] = useState(5);
 
   useEffect(() => {
     initializeGame();
@@ -27,6 +29,8 @@ const Game = () => {
     setSelectedCard(null);
     setGameOver(false);
     setWinnerMessage("");
+    setPlayer1Score(5);
+    setPlayer2Score(5);
   };
 
   const handleCardSelect = (card) => {
@@ -92,12 +96,23 @@ const Game = () => {
         if (shouldFlip) {
           board[adjIndex].owner = card.owner;
           newFlippedCards.push(adjIndex);
+          updateScores(adjacentCard.owner, card.owner);
         }
       }
     });
 
     setFlippedCards(newFlippedCards);
     setBoard(board);
+  };
+
+  const updateScores = (oldOwner, newOwner) => {
+    if (newOwner === "red") {
+      setPlayer1Score((prevScore) => Math.max(0, prevScore + 1));
+      setPlayer2Score((prevScore) => Math.max(0, prevScore - 1));
+    } else {
+      setPlayer1Score((prevScore) => Math.max(0, prevScore - 1));
+      setPlayer2Score((prevScore) => Math.max(0, prevScore + 1));
+    }
   };
 
   const getWinner = (finalBoard) => {
@@ -126,6 +141,7 @@ const Game = () => {
             currentPlayer={currentPlayer}
             playerPosition="left"
           />
+          <div className="score">Score: {player1Score}</div>
         </div>
         <Board board={board} onCardPlace={handleCardPlace} />
         <div className="player-hand-container">
@@ -139,6 +155,7 @@ const Game = () => {
             currentPlayer={currentPlayer}
             playerPosition="right"
           />
+          <div className="score">Score: {player2Score}</div>
         </div>
       </div>
       {gameOver && (
