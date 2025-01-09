@@ -38,8 +38,13 @@ const Hand = ({
                 ? "selected-left"
                 : "selected-right"
               : ""
-          } ${card.owner === currentPlayer ? "current-player" : ""}`}
+          } ${
+            card.owner === currentPlayer && card === draggedCard
+              ? "hidden" // Masque la carte pendant le drag
+              : ""
+          }`}
         >
+          {/* Affiche la carte si elle n'est pas en cours de drag */}
           {showCards || card.owner === currentPlayer ? (
             <Card card={card} />
           ) : (
