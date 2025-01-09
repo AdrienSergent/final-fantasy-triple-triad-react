@@ -38,3 +38,13 @@
     transform: rotateY(180deg);
   }
 }
+
+.cell {
+  border: 1px solid #ddd;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cell.drag-over {
+  background-color: #f0f8ff; /* Highlight lors du drag */
+  border: 1px dashed #333;
+}

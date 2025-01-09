@@ -5,17 +5,46 @@
   align-items: center;
   margin: 20px;
 }
+
 .hand-card {
   margin: 10px 0;
-  cursor: pointer;
+  cursor: grab;
   transition: transform 0.2s ease-in-out;
 }
+
+.hand-card:active {
+  cursor: grabbing;
+}
+
 .hand-card:hover {
   transform: scale(1.1);
 }
+
 .hand-card.selected-left {
   transform: translateX(20px);
 }
+
 .hand-card.selected-right {
   transform: translateX(-20px);
+}
+
+.card-back {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  border: 1px solid #000;
+}
+
+.floating-card {
+  position: fixed; /* Fixe pour suivre précisément la souris */
+  width: 100px;
+  height: 100px;
+  pointer-events: none; /* Empêche les interférences avec les autres éléments */
+  transform: scale(1.1);
+  z-index: 1000; /* Toujours au-dessus */
 }

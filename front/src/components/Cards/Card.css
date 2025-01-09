@@ -33,3 +33,17 @@
 .bottom {
   bottom: 0;
 }
+
+.card-back {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+  background-color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}

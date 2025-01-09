@@ -9,13 +9,23 @@ const Board = ({ board, onCardPlace }) => {
     if (flippedCards.length > 0) {
       const timer = setTimeout(() => {
         setFlippedCards([]);
-      }, 600); // Duration of the flip animation
+      }, 600); // Durée de l'animation de flip
       return () => clearTimeout(timer);
     }
   }, [flippedCards]);
 
+  const handleDragOver = (event) => {
+    event.preventDefault(); // Permet de déposer la carte
+  };
+
+  const handleDrop = (event, index) => {
+    event.preventDefault();
+    const card = JSON.parse(event.dataTransfer.getData("card")); // Récupère les données de la carte
+    onCardPlace(index, setFlippedCards, card); // Place la carte sur le plateau
+  };
+
   const handleCardPlace = (index) => {
-    onCardPlace(index, setFlippedCards);
+    onCardPlace(index, setFlippedCards); // Placement via clic
   };
 
   return (
@@ -26,7 +36,9 @@ const Board = ({ board, onCardPlace }) => {
           className={`cell ${cell ? cell.owner : ""} ${
             flippedCards.includes(index) ? "card-flip" : ""
           }`}
-          onClick={() => handleCardPlace(index)}
+          onClick={() => handleCardPlace(index)} // Placement via clic
+          onDragOver={handleDragOver} // Permet le survol
+          onDrop={(event) => handleDrop(event, index)} // Gestion du drop
         >
           {cell && <Card card={cell} />}
         </div>

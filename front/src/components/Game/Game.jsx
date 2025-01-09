@@ -15,6 +15,8 @@ const Game = () => {
   const [winnerMessage, setWinnerMessage] = useState("");
   const [player1Score, setPlayer1Score] = useState(5);
   const [player2Score, setPlayer2Score] = useState(5);
+  const [showPlayer1Cards, setShowPlayer1Cards] = useState(true); // Visibilité des cartes du joueur 1
+  const [showPlayer2Cards, setShowPlayer2Cards] = useState(true); // Visibilité des cartes du joueur 2
 
   useEffect(() => {
     initializeGame();
@@ -39,19 +41,23 @@ const Game = () => {
     }
   };
 
-  const handleCardPlace = (index, setFlippedCards) => {
-    if (selectedCard && !board[index]) {
+  const handleCardPlace = (index, setFlippedCards, draggedCard = null) => {
+    const cardToPlace = draggedCard || selectedCard; // Priorité au drag-and-drop
+    if (cardToPlace && !board[index]) {
       const newBoard = board.slice();
-      newBoard[index] = { ...selectedCard, position: index };
+      newBoard[index] = { ...cardToPlace, position: index };
       setBoard(newBoard);
-      if (currentPlayer === "red") {
-        setPlayer1Hand(player1Hand.filter((c) => c.id !== selectedCard.id));
+
+      if (cardToPlace.owner === "red") {
+        setPlayer1Hand(player1Hand.filter((c) => c.id !== cardToPlace.id));
       } else {
-        setPlayer2Hand(player2Hand.filter((c) => c.id !== selectedCard.id));
+        setPlayer2Hand(player2Hand.filter((c) => c.id !== cardToPlace.id));
       }
-      checkForFlip(newBoard, index, selectedCard, setFlippedCards);
+
+      checkForFlip(newBoard, index, cardToPlace, setFlippedCards);
       setSelectedCard(null);
       setCurrentPlayer(currentPlayer === "red" ? "blue" : "red");
+
       if (newBoard.every((cell) => cell !== null)) {
         setGameOver(true);
         setWinnerMessage(getWinner(newBoard));
@@ -129,6 +135,24 @@ const Game = () => {
 
   return (
     <div className="game-container">
+      <div className="settings">
+        <label>
+          <input
+            type="checkbox"
+            checked={showPlayer1Cards}
+            onChange={() => setShowPlayer1Cards((prev) => !prev)}
+          />
+          Show Player 1 Cards
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={showPlayer2Cards}
+            onChange={() => setShowPlayer2Cards((prev) => !prev)}
+          />
+          Show Player 2 Cards
+        </label>
+      </div>
       <div className="game">
         <div className="player-hand-container">
           {currentPlayer === "red" && (
@@ -140,6 +164,7 @@ const Game = () => {
             selectedCard={selectedCard}
             currentPlayer={currentPlayer}
             playerPosition="left"
+            showCards={showPlayer1Cards}
           />
           <div className="score">Score: {player1Score}</div>
         </div>
@@ -154,6 +179,7 @@ const Game = () => {
             selectedCard={selectedCard}
             currentPlayer={currentPlayer}
             playerPosition="right"
+            showCards={showPlayer2Cards}
           />
           <div className="score">Score: {player2Score}</div>
         </div>
