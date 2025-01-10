@@ -2,7 +2,7 @@ import { cardsData } from "./cardsData";
 
 export const fetchInitialGameState = () => {
   // Mélanger les cartes
-  const shuffledCards = [...cardsData];
+  const shuffledCards = [...cardsData].sort(() => Math.random() - 0.5);
 
   // Assigner 5 cartes aléatoires à chaque joueur
   const player1Hand = shuffledCards.slice(0, 5).map((card, index) => ({
