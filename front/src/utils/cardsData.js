@@ -1,9 +1,8 @@
 export const cardsData = [
   {
     name: "Acarnan",
-    blueImage: "front/src/assets/cards/final_fantasy_VIII/Acarnan.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Acarnan.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 8,
     left: 4,
     right: 8,
@@ -11,10 +10,11 @@ export const cardsData = [
   },
   {
     name: "Acron",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Acron.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Acron.rouge.jpg",
+    // blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Acron.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 9,
     left: 8,
     right: 7,
@@ -22,10 +22,11 @@ export const cardsData = [
   },
   {
     name: "Adel",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adel.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adel.rouge.jpg",
+    // blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adel.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 6,
     left: 7,
     right: 4,
@@ -33,10 +34,11 @@ export const cardsData = [
   },
   {
     name: "Adephage",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adephage.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adephage.rouge.jpg",
+    // blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Adephage.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 2,
     left: 2,
     right: 4,
@@ -44,10 +46,11 @@ export const cardsData = [
   },
   {
     name: "Agamemnon",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Agamemnon.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Agamemnon.rouge.jpg",
+    // blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Agamemnon.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 7,
     left: 1,
     right: 8,
@@ -55,10 +58,12 @@ export const cardsData = [
   },
   {
     name: "Ahuri",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Ahuri.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Ahuri.rouge.jpg",
+    // blueImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Ahuri.bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Ahuri.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 1,
     left: 6,
     right: 2,
@@ -66,10 +71,12 @@ export const cardsData = [
   },
   {
     name: "Alexander",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alexander.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alexander.rouge.jpg",
+    // blueImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alexander.bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alexander.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 3,
     left: 2,
     right: 9,
@@ -77,10 +84,12 @@ export const cardsData = [
   },
   {
     name: "Alienator",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alienator.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alienator.rouge.jpg",
+    // blueImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alienator.bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Alienator.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 4,
     left: 7,
     right: 9,
@@ -88,10 +97,12 @@ export const cardsData = [
   },
   {
     name: "Anakronox",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Anakronox.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Anakronox.rouge.jpg",
+    // blueImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Anakronox.bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Anakronox.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 3,
     left: 5,
     right: 2,
@@ -99,10 +110,12 @@ export const cardsData = [
   },
   {
     name: "Angel",
-    blueImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Angel.bleue.jpg",
-    redImage:
-      "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Angel.rouge.jpg",
+    // blueImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Angel.bleue.jpg",
+    // redImage:
+    //   "/mnt/data/Final_Fantasy_VIII_cards/Final Fantasy VIII/Angel.rouge.jpg",
+    blueImage: "https://i.ibb.co/XLDBsZJ/Acarnan-bleue.jpg",
+    redImage: "https://i.ibb.co/qsQZ3ys/Acarnan-rouge.jpg",
     top: 6,
     left: 2,
     right: 7,
