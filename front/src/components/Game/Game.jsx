@@ -83,6 +83,7 @@ const Game = () => {
       ) {
         const adjacentCard = board[adjIndex];
         let shouldFlip = false;
+
         switch (i) {
           case 0: // above
             shouldFlip = card.top > adjacentCard.bottom;
@@ -99,9 +100,18 @@ const Game = () => {
           default:
             break;
         }
+
         if (shouldFlip) {
-          board[adjIndex].owner = card.owner;
+          board[adjIndex] = {
+            ...adjacentCard,
+            owner: card.owner,
+            image:
+              card.owner === "red"
+                ? adjacentCard.redImage
+                : adjacentCard.blueImage, // Mise à jour de l'image
+          };
           newFlippedCards.push(adjIndex);
+          console.log(adjacentCard, "carddddddddddd");
           updateScores(adjacentCard.owner, card.owner);
         }
       }

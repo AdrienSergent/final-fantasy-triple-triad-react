@@ -11,7 +11,9 @@ export const fetchInitialGameState = () => {
     left: card.left,
     right: card.right,
     bottom: card.bottom,
-    image: card.redImage, // Image rouge pour le joueur 1
+    image: card.redImage,
+    redImage: card.redImage,
+    blueImage: card.blueImage, // Image rouge pour le joueur 1
     owner: "red",
   }));
 
@@ -21,7 +23,9 @@ export const fetchInitialGameState = () => {
     left: card.left,
     right: card.right,
     bottom: card.bottom,
-    image: card.blueImage, // Image bleue pour le joueur 2
+    image: card.blueImage,
+    redImage: card.redImage,
+    blueImage: card.blueImage, // Image bleue pour le joueur 2
     owner: "blue",
   }));
 
