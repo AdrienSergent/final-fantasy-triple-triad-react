@@ -1,12 +1,12 @@
+import React from "react";
 import "./Card.css";
 
-const Card = ({ card }) => {
+const Card = ({ card, className = "" }) => {
   return (
-    <div className="card">
-      <div className="card-value top">{card.top}</div>
-      <div className="card-value left">{card.left}</div>
-      <div className="card-value right">{card.right}</div>
-      <div className="card-value bottom">{card.bottom}</div>
+    <div className={`card ${className}`}>
+      {card.image && (
+        <img src={card.image} alt={card.name} className="card-image" />
+      )}
     </div>
   );
 };

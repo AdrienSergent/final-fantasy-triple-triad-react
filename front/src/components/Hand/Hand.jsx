@@ -53,14 +53,10 @@ const Hand = ({
                 ? "selected-left"
                 : "selected-right"
               : ""
-          } ${
-            card.owner === currentPlayer && card === draggedCard
-              ? "hidden" // Masque la carte pendant le drag
-              : ""
           }`}
         >
           {showCards || card.owner === currentPlayer ? (
-            <img src={card.image} alt={card.name} className="card-image" />
+            <Card card={card} className="hand-card-image" /> // Utilise la classe pour les cartes dans la main
           ) : (
             <div className="card-back">?</div>
           )}
@@ -69,11 +65,7 @@ const Hand = ({
 
       {draggedCard && (
         <div className="floating-card" style={floatingStyle}>
-          <img
-            src={draggedCard.image}
-            alt={draggedCard.name}
-            className="card-image"
-          />
+          <Card card={draggedCard} className="hand-card-image" />
         </div>
       )}
     </div>

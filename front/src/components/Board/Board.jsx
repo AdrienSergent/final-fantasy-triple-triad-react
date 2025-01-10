@@ -4,6 +4,7 @@ import Card from "../Cards/Card";
 
 const Board = ({ board, onCardPlace }) => {
   const [flippedCards, setFlippedCards] = useState([]);
+  const [dragOverCell, setDragOverCell] = useState(null); // Pour surligner une cellule lors du drag
 
   useEffect(() => {
     if (flippedCards.length > 0) {
@@ -14,12 +15,18 @@ const Board = ({ board, onCardPlace }) => {
     }
   }, [flippedCards]);
 
-  const handleDragOver = (event) => {
+  const handleDragOver = (event, index) => {
     event.preventDefault(); // Permet de déposer la carte
+    setDragOverCell(index); // Marque la cellule survolée
+  };
+
+  const handleDragLeave = () => {
+    setDragOverCell(null); // Supprime le surlignage
   };
 
   const handleDrop = (event, index) => {
     event.preventDefault();
+    setDragOverCell(null); // Réinitialise le surlignage
     const card = JSON.parse(event.dataTransfer.getData("card")); // Récupère les données de la carte
     onCardPlace(index, setFlippedCards, card); // Place la carte sur le plateau
   };
@@ -35,12 +42,13 @@ const Board = ({ board, onCardPlace }) => {
           key={index}
           className={`cell ${cell ? cell.owner : ""} ${
             flippedCards.includes(index) ? "card-flip" : ""
-          }`}
+          } ${dragOverCell === index ? "drag-over" : ""}`}
           onClick={() => handleCardPlace(index)} // Placement via clic
-          onDragOver={handleDragOver} // Permet le survol
+          onDragOver={(event) => handleDragOver(event, index)} // Permet le survol
+          onDragLeave={handleDragLeave} // Supprime le surlignage au sortir
           onDrop={(event) => handleDrop(event, index)} // Gestion du drop
         >
-          {cell && <Card card={cell} />}
+          {cell && <Card card={cell} />} {/* Affiche la carte si elle existe */}
         </div>
       ))}
     </div>
