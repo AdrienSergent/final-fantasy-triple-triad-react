@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Board from "../Board/Board";
-import Hand from "../Hand/Hand";
+import GameOver from "../GameOver/GameOver";
+import Settings from "../Settings/Settings";
+import PlayerHand from "../PlayerHand/PlayerHand";
+import Info from "../Info/Info"; // Import du composant Info
 import { fetchInitialGameState } from "../../utils/api";
+import { checkForFlip, updateScores, getWinner } from "../../utils/utils"; // Import des utilitaires
 import "./Game.css";
-import cursorImage from "../../assets/cursor.png"; // Import the cursor image
+import cursorImage from "../../assets/cursor.png";
 
 const Game = () => {
   const [board, setBoard] = useState([]);
@@ -15,8 +19,8 @@ const Game = () => {
   const [winnerMessage, setWinnerMessage] = useState("");
   const [player1Score, setPlayer1Score] = useState(5);
   const [player2Score, setPlayer2Score] = useState(5);
-  const [showPlayer1Cards, setShowPlayer1Cards] = useState(true); // Visibilité des cartes du joueur 1
-  const [showPlayer2Cards, setShowPlayer2Cards] = useState(true); // Visibilité des cartes du joueur 2
+  const [showPlayer1Cards, setShowPlayer1Cards] = useState(true);
+  const [showPlayer2Cards, setShowPlayer2Cards] = useState(true);
 
   useEffect(() => {
     initializeGame();
@@ -42,7 +46,7 @@ const Game = () => {
   };
 
   const handleCardPlace = (index, setFlippedCards, draggedCard = null) => {
-    const cardToPlace = draggedCard || selectedCard; // Priorité au drag-and-drop
+    const cardToPlace = draggedCard || selectedCard;
     if (cardToPlace && !board[index]) {
       const newBoard = board.slice();
       newBoard[index] = { ...cardToPlace, position: index };
@@ -54,7 +58,15 @@ const Game = () => {
         setPlayer2Hand(player2Hand.filter((c) => c.id !== cardToPlace.id));
       }
 
-      checkForFlip(newBoard, index, cardToPlace, setFlippedCards);
+      const flippedCards = checkForFlip(
+        newBoard,
+        index,
+        cardToPlace,
+        (oldOwner, newOwner) =>
+          updateScores(oldOwner, newOwner, setPlayer1Score, setPlayer2Score)
+      );
+      setFlippedCards(flippedCards);
+
       setSelectedCard(null);
       setCurrentPlayer(currentPlayer === "red" ? "blue" : "red");
 
@@ -65,142 +77,41 @@ const Game = () => {
     }
   };
 
-  const checkForFlip = (board, index, card, setFlippedCards) => {
-    const adjacentIndices = [
-      index - 3, // above
-      index + 3, // below
-      index % 3 !== 0 ? index - 1 : null, // left
-      index % 3 !== 2 ? index + 1 : null, // right
-    ];
-
-    const newFlippedCards = [];
-
-    adjacentIndices.forEach((adjIndex, i) => {
-      if (
-        adjIndex !== null &&
-        board[adjIndex] &&
-        board[adjIndex].owner !== card.owner
-      ) {
-        const adjacentCard = board[adjIndex];
-        let shouldFlip = false;
-
-        switch (i) {
-          case 0: // above
-            shouldFlip = card.top > adjacentCard.bottom;
-            break;
-          case 1: // below
-            shouldFlip = card.bottom > adjacentCard.top;
-            break;
-          case 2: // left
-            shouldFlip = card.left > adjacentCard.right;
-            break;
-          case 3: // right
-            shouldFlip = card.right > adjacentCard.left;
-            break;
-          default:
-            break;
-        }
-
-        if (shouldFlip) {
-          board[adjIndex] = {
-            ...adjacentCard,
-            owner: card.owner,
-            image:
-              card.owner === "red"
-                ? adjacentCard.redImage
-                : adjacentCard.blueImage, // Mise à jour de l'image
-          };
-          newFlippedCards.push(adjIndex);
-          console.log(adjacentCard, "carddddddddddd");
-          updateScores(adjacentCard.owner, card.owner);
-        }
-      }
-    });
-
-    setFlippedCards(newFlippedCards);
-    setBoard(board);
-  };
-
-  const updateScores = (oldOwner, newOwner) => {
-    if (newOwner === "red") {
-      setPlayer1Score((prevScore) => Math.max(0, prevScore + 1));
-      setPlayer2Score((prevScore) => Math.max(0, prevScore - 1));
-    } else {
-      setPlayer1Score((prevScore) => Math.max(0, prevScore - 1));
-      setPlayer2Score((prevScore) => Math.max(0, prevScore + 1));
-    }
-  };
-
-  const getWinner = (finalBoard) => {
-    const redCount = finalBoard.filter(
-      (cell) => cell && cell.owner === "red"
-    ).length;
-    const blueCount = finalBoard.filter(
-      (cell) => cell && cell.owner === "blue"
-    ).length;
-    if (redCount > blueCount) return "Red wins!";
-    if (blueCount > redCount) return "Blue wins!";
-    return "Draw!";
-  };
-
   return (
     <div className="game-container">
-      <div className="settings">
-        <label>
-          <input
-            type="checkbox"
-            checked={showPlayer1Cards}
-            onChange={() => setShowPlayer1Cards((prev) => !prev)}
-          />
-          Show Player 1 Cards
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showPlayer2Cards}
-            onChange={() => setShowPlayer2Cards((prev) => !prev)}
-          />
-          Show Player 2 Cards
-        </label>
-      </div>
+      <Settings
+        showPlayer1Cards={showPlayer1Cards}
+        setShowPlayer1Cards={setShowPlayer1Cards}
+        showPlayer2Cards={showPlayer2Cards}
+        setShowPlayer2Cards={setShowPlayer2Cards}
+      />
       <div className="game">
-        <div className="player-hand-container">
-          {currentPlayer === "red" && (
-            <img src={cursorImage} alt="cursor" className="cursor" />
-          )}
-          <Hand
-            hand={player1Hand}
-            onCardSelect={handleCardSelect}
-            selectedCard={selectedCard}
-            currentPlayer={currentPlayer}
-            playerPosition="left"
-            showCards={showPlayer1Cards}
-          />
-          <div className="score">Score: {player1Score}</div>
-        </div>
+        <PlayerHand
+          currentPlayer={currentPlayer}
+          cursorImage={cursorImage}
+          hand={player1Hand}
+          onCardSelect={handleCardSelect}
+          selectedCard={selectedCard}
+          playerPosition="left"
+          showCards={showPlayer1Cards}
+          score={player1Score}
+        />
         <Board board={board} onCardPlace={handleCardPlace} />
-        <div className="player-hand-container">
-          {currentPlayer === "blue" && (
-            <img src={cursorImage} alt="cursor" className="cursor" />
-          )}
-          <Hand
-            hand={player2Hand}
-            onCardSelect={handleCardSelect}
-            selectedCard={selectedCard}
-            currentPlayer={currentPlayer}
-            playerPosition="right"
-            showCards={showPlayer2Cards}
-          />
-          <div className="score">Score: {player2Score}</div>
-        </div>
+        <PlayerHand
+          currentPlayer={currentPlayer}
+          cursorImage={cursorImage}
+          hand={player2Hand}
+          onCardSelect={handleCardSelect}
+          selectedCard={selectedCard}
+          playerPosition="right"
+          showCards={showPlayer2Cards}
+          score={player2Score}
+        />
       </div>
+      {selectedCard && <Info selectedCard={selectedCard} />}{" "}
+      {/* Condition d'affichage */}
       {gameOver && (
-        <div className="end-game">
-          <div className="winner">{winnerMessage}</div>
-          <button onClick={initializeGame} className="reset-button">
-            Reset
-          </button>
-        </div>
+        <GameOver winnerMessage={winnerMessage} onReset={initializeGame} />
       )}
     </div>
   );

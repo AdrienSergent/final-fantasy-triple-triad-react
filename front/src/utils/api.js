@@ -7,6 +7,7 @@ export const fetchInitialGameState = () => {
   // Assigner 5 cartes aléatoires à chaque joueur
   const player1Hand = shuffledCards.slice(0, 5).map((card, index) => ({
     id: index + 1,
+    name: card.name,
     top: card.top,
     left: card.left,
     right: card.right,
@@ -19,6 +20,7 @@ export const fetchInitialGameState = () => {
 
   const player2Hand = shuffledCards.slice(5, 10).map((card, index) => ({
     id: index + 6,
+    name: card.name,
     top: card.top,
     left: card.left,
     right: card.right,
